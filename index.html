@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Swiper demo</title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"
+    />
+
+    <style>
+      html,
+      body {
+        position: relative;
+        height: 100%;
+      }
+
+      body {
+        background: #eee;
+        font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+        font-size: 14px;
+        color: #000;
+        margin: 0;
+        padding: 0;
+      }
+
+      .swiper {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .swiper-slide {
+        text-align: center;
+        font-size: 18px;
+        background: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: transform 0.5s ease;
+      }
+      .swiper-slide img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .swiper-slide {
+        display: flex;
+        transition: transform 0.5s ease-in-out;
+      }
+      .swiper-wrapper {
+        display: flex;
+        transition: transform 0.5s ease;
+      }
+      .swiper-button-disabled {
+        opacity: 0.5;
+        pointer-events: none;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="swiper mySwiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">Slide 1</div>
+        <div class="swiper-slide">Slide 2</div>
+        <div class="swiper-slide">Slide 3</div>
+        <div class="swiper-slide">Slide 4</div>
+        <div class="swiper-slide">Slide 5</div>
+        <div class="swiper-slide">Slide 6</div>
+        <div class="swiper-slide">Slide 7</div>
+        <div class="swiper-slide">Slide 8</div>
+        <div class="swiper-slide">Slide 9</div>
+      </div>
+      <div class="swiper-button-next swiper-button-disabled"></div>
+      <div class="swiper-button-prev swiper-button-disabled"></div>
+    </div>
+    <script>
+      const slides = document.querySelectorAll(".swiper-slide");
+      const nextButton = document.querySelector(".swiper-button-next");
+      const prevButton = document.querySelector(".swiper-button-prev");
+      let currentIndex = 0;
+
+      function showSlide(index) {
+        slides.forEach((slide) => {
+          slide.style.transform = `translateX(-${index * 100}%)`;
+        });
+      }
+
+      function nextSlide() {
+        if (currentIndex < slides.length - 1) {
+          currentIndex++;
+          showSlide(currentIndex);
+        }
+        toggleButtons();
+      }
+
+      function prevSlide() {
+        if (currentIndex > 0) {
+          currentIndex--;
+          showSlide(currentIndex);
+        }
+        toggleButtons();
+      }
+
+      function toggleButtons() {
+        if (currentIndex === 0) {
+          prevButton.classList.add("swiper-button-disabled");
+        } else {
+          prevButton.classList.remove("swiper-button-disabled");
+        }
+
+        if (currentIndex === slides.length - 1) {
+          nextButton.classList.add("swiper-button-disabled");
+        } else {
+          nextButton.classList.remove("swiper-button-disabled");
+        }
+      }
+
+      nextButton.addEventListener("click", nextSlide);
+      prevButton.addEventListener("click", prevSlide);
+
+      showSlide(currentIndex);
+      toggleButtons();
+    </script>
+  </body>
+</html>
